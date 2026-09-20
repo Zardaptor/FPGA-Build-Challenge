@@ -1,0 +1,141 @@
+// ============================================================================
+// RISC-V RV32I Fibonacci Test Program
+// Project: V-SPACE FPGA Build Challenge 2026
+// Author: Team Suraj
+//
+// Description:
+//   Calculates the first 10 Fibonacci numbers and stores them in
+//   data memory starting at address 0x100 (word 64). Final result
+//   (F10 = 55) is placed in register x10 (a0) for LED display.
+//
+//   Expected register values after execution:
+//     x1  = 34  (F9, previous-previous)
+//     x2  = 55  (F10, previous)
+//     x3  = 10  (loop limit)
+//     x4  = 10  (loop counter, equals x3 when done)
+//     x5  = 296 (0x128, final memory address after 10 stores)
+//     x6  = 55  (last computed Fibonacci number)
+//     x10 = 55  (a0, copied from x6 for output)
+//
+//   Expected memory contents (word addresses):
+//     mem[64]  = 1    (F1)
+//     mem[65]  = 2    (F2)  -- Note: F1=0+1=1, F2=1+1=2
+//     mem[66]  = 3    (F3)
+//     mem[67]  = 5    (F4)
+//     mem[68]  = 8    (F5)
+//     mem[69]  = 13   (F6)
+//     mem[70]  = 21   (F7)
+//     mem[71]  = 34   (F8)
+//     mem[72]  = 55   (F9)
+//     mem[73]  = 89   (F10)
+//
+//   Wait -- let me recalculate. Starting values: x1=0, x2=1
+//   Loop body: x6 = x1 + x2, then x1=x2, x2=x6
+//   Iteration 1: x6 = 0+1 = 1,  x1=1, x2=1   → store 1
+//   Iteration 2: x6 = 1+1 = 2,  x1=1, x2=2   → store 2
+//   Iteration 3: x6 = 1+2 = 3,  x1=2, x2=3   → store 3
+//   Iteration 4: x6 = 2+3 = 5,  x1=3, x2=5   → store 5
+//   Iteration 5: x6 = 3+5 = 8,  x1=5, x2=8   → store 8
+//   Iteration 6: x6 = 5+8 = 13, x1=8, x2=13  → store 13
+//   Iteration 7: x6 = 8+13= 21, x1=13,x2=21  → store 21
+//   Iteration 8: x6 =13+21= 34, x1=21,x2=34  → store 34
+//   Iteration 9: x6 =21+34= 55, x1=34,x2=55  → store 55
+//   Iteration10: x6 =34+55= 89, x1=55,x2=89  → store 89
+//   Final: x10 = x6 = 89
+//
+//   So a0 = 89, LEDs show lower 4 bits = 0b1001 = LD3,LD0 ON
+//
+// Assembly:
+//   0x00: addi x1, x0, 0       # x1 = 0 (F_n-2)
+//   0x04: addi x2, x0, 1       # x2 = 1 (F_n-1)
+//   0x08: addi x3, x0, 10      # x3 = 10 (loop limit)
+//   0x0C: addi x4, x0, 0       # x4 = 0 (loop counter)
+//   0x10: addi x5, x0, 256     # x5 = 256 = 0x100 (base addr)
+// loop:
+//   0x14: add  x6, x1, x2      # x6 = F_n-2 + F_n-1
+//   0x18: sw   x6, 0(x5)       # mem[x5] = x6
+//   0x1C: addi x5, x5, 4       # x5 += 4 (next word)
+//   0x20: add  x1, x0, x2      # x1 = x2 (shift)
+//   0x24: add  x2, x0, x6      # x2 = x6 (shift)
+//   0x28: addi x4, x4, 1       # x4++ (counter)
+//   0x2C: bne  x4, x3, loop    # if x4 != x3, goto loop (PC-0x18 = -24)
+// done:
+//   0x30: add  x10, x0, x6     # a0 = x6 (final result)
+//   0x34: jal  x0, done        # infinite loop (halt): jump to self
+//
+// Encoding Reference (RISC-V RV32I):
+//   R-type: funct7[6:0] | rs2[4:0] | rs1[4:0] | funct3[2:0] | rd[4:0] | opcode[6:0]
+//   I-type: imm[11:0]              | rs1[4:0] | funct3[2:0] | rd[4:0] | opcode[6:0]
+//   S-type: imm[11:5]   | rs2[4:0] | rs1[4:0] | funct3[2:0] | imm[4:0]| opcode[6:0]
+//   B-type: imm[12|10:5]| rs2[4:0] | rs1[4:0] | funct3[2:0] |imm[4:1|11]| opcode[6:0]
+//   J-type: imm[20|10:1|11|19:12]                            | rd[4:0] | opcode[6:0]
+// ============================================================================
+
+// Addr  Instruction                 Encoding
+// ----  --------------------------  --------------------------------
+
+// 0x00: addi x1, x0, 0
+// I-type: imm=000000000000, rs1=00000, funct3=000, rd=00001, opcode=0010011
+// = 0000_0000_0000_00000_000_00001_0010011
+00000093
+
+// 0x04: addi x2, x0, 1
+// I-type: imm=000000000001, rs1=00000, funct3=000, rd=00010, opcode=0010011
+// = 0000_0000_0001_00000_000_00010_0010011
+00100113
+
+// 0x08: addi x3, x0, 10
+// I-type: imm=000000001010, rs1=00000, funct3=000, rd=00011, opcode=0010011
+// = 0000_0000_1010_00000_000_00011_0010011
+00a00193
+
+// 0x0C: addi x4, x0, 0
+// I-type: imm=000000000000, rs1=00000, funct3=000, rd=00100, opcode=0010011
+00000213
+
+// 0x10: addi x5, x0, 256
+// I-type: imm=000100000000 (256=0x100), rs1=00000, funct3=000, rd=00101, opcode=0010011
+// = 0001_0000_0000_00000_000_00101_0010011
+10000293
+
+// 0x14: add x6, x1, x2      [LOOP START]
+// R-type: funct7=0000000, rs2=00010, rs1=00001, funct3=000, rd=00110, opcode=0110011
+// = 0000000_00010_00001_000_00110_0110011
+00208333
+
+// 0x18: sw x6, 0(x5)
+// S-type: imm=000000000000, rs2=00110(x6), rs1=00101(x5), funct3=010, opcode=0100011
+// imm[11:5]=0000000, rs2=00110, rs1=00101, funct3=010, imm[4:0]=00000
+// = 0000000_00110_00101_010_00000_0100011
+0062a023
+
+// 0x1C: addi x5, x5, 4
+// I-type: imm=000000000100, rs1=00101, funct3=000, rd=00101, opcode=0010011
+00428293
+
+// 0x20: add x1, x0, x2
+// R-type: funct7=0000000, rs2=00010, rs1=00000, funct3=000, rd=00001, opcode=0110011
+002000b3
+
+// 0x24: add x2, x0, x6
+// R-type: funct7=0000000, rs2=00110, rs1=00000, funct3=000, rd=00010, opcode=0110011
+00600133
+
+// 0x28: addi x4, x4, 1
+// I-type: imm=000000000001, rs1=00100, funct3=000, rd=00100, opcode=0010011
+00120213
+
+// 0x2C: bne x4, x3, -24 (loop = 0x14, offset = 0x14 - 0x2C = -24 = -0x18)
+// B-type: imm = -24 = 0xFFFFFFE8, imm[12:1] = 111111101000
+// imm[12]=1, imm[10:5]=111110, rs2=00011(x3), rs1=00100(x4), funct3=001, imm[4:1]=1100, imm[11]=1
+// = 1_111110_00011_00100_001_1100_1_1100011
+fe3214e3
+
+// 0x30: add x10, x0, x6
+// R-type: funct7=0000000, rs2=00110, rs1=00000, funct3=000, rd=01010, opcode=0110011
+00600533
+
+// 0x34: jal x0, 0 (jump to self = infinite loop / halt)
+// J-type: imm=0, rd=00000, opcode=1101111
+// imm[20|10:1|11|19:12] = 0_0000000000_0_00000000
+0000006f

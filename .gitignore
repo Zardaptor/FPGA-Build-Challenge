@@ -1,0 +1,25 @@
+# Vivado-specific ignore files
+*.jou
+*.log
+*.str
+*.pb
+*.wdb
+*.dir
+*.vcd
+*.*~
+*.backup.*
+.Xil/
+
+# Huge Vivado build directories
+*.cache/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+
+# Keep the Vivado project file itself just in case judges want to open it
+!*.xpr
+
+# OS generated files
+.DS_Store
+Thumbs.db

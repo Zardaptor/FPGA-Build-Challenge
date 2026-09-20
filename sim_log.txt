@@ -1,0 +1,9 @@
+ERROR: [XSIM 43-4316] Can not find file: Experiment-5-Advanced\RTL\*.v
+Vivado Simulator v2026.1
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/AMDDesignTools/2026.1/Vivado/bin/unwrapped/win64.o/xelab.exe -debug typical -top tb_rv32i_pipeline -snapshot tb_snap 
+Multi-threading is on. Using 14 slave threads.
+ERROR: [XSIM 43-3225] Cannot find design unit work.tb_rv32i_pipeline in library work located at xsim.dir/work.
+ERROR: Please check the snapshot name which is created during 'xelab',the current snapshot name "xsim.dir/tb_snap/xsimk.exe" does not exist 
+DONE 
