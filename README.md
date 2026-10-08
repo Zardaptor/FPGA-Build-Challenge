@@ -3,7 +3,9 @@
 **Members:** Suraj Kalyanaraman, Shiv Raahul B, Arun S M
 
 **Registration Number:** 24BEI0004, 24BEI0007,  24BEE0242
+
 **Board:** PYNQ-Z2  
+
 **FPGA:** Zynq-7000 xc7z020  
 
 ## Project Summary
