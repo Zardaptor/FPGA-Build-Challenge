@@ -29,13 +29,13 @@ The design consists of an 8-bit ALU that supports operations such as ADD, SUB, A
 - **PYNQ-Z2 Auto-Test Wrapper**: A wrapper module designed for the PYNQ-Z2 board to facilitate automated testing by mapping the ALU I/O to the board's switches, buttons, and LEDs for hardware validation.
 
 ## 4. Simulation Results
-*(Placeholder: Insert simulation waveform screenshots here)*
+*![Simulation Waveform](../Simulation/waveform.png)*
 - Screenshot 1: Addition and Subtraction with N and C flags.
 - Screenshot 2: Logical operations with N and Z flags.
 - Screenshot 3: Overflow condition during signed arithmetic.
 
 ## 5. Hardware Implementation
-*(Placeholder: Insert hardware setup photos and resource utilization report here)*
+*![Hardware Setup](../Images/board_setup.jpg)*
 - Photo 1: PYNQ-Z2 board showing ALU inputs via switches.
 - Photo 2: PYNQ-Z2 board showing output result and flags on LEDs.
 - **Resource Utilization**: (Insert table/screenshot of LUTs, FFs, etc. used).
