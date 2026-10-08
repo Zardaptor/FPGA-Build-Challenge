@@ -38,7 +38,6 @@ The design consists of an 8-bit ALU that supports operations such as ADD, SUB, A
 *![Hardware Setup](../Images/board_setup.jpg)*
 - Photo 1: PYNQ-Z2 board showing ALU inputs via switches.
 - Photo 2: PYNQ-Z2 board showing output result and flags on LEDs.
-- **Resource Utilization**: (Insert table/screenshot of LUTs, FFs, etc. used).
 
 ## 6. Applications
 - Central Processing Unit (CPU) ALUs

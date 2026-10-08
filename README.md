@@ -2,7 +2,7 @@
 
 **Team Name:** Team Suraj  
 **Members:** Suraj  
-**Registration Number:** TBD  
+**Registration Number:**  (Please fill this in on your submission)  
 **Board:** PYNQ-Z2  
 **FPGA:** Zynq-7000 xc7z020  
 

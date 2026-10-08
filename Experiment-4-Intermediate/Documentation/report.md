@@ -33,15 +33,9 @@ The design implements a highly configurable SPI communication link:
 
 ## 4. Simulation Results
 *(Add screenshots of waveforms demonstrating data transfer across different CPOL/CPHA settings)*
-- `[Placeholder: SPI Mode 0 (CPOL=0, CPHA=0) Waveform]`
-- `[Placeholder: SPI Mode 1 (CPOL=0, CPHA=1) Waveform]`
-- `[Placeholder: SPI Mode 2 (CPOL=1, CPHA=0) Waveform]`
-- `[Placeholder: SPI Mode 3 (CPOL=1, CPHA=1) Waveform]`
 
 ## 5. Hardware Implementation
 *(Add photos of the FPGA running the test or screenshots of the PYNQ interface reporting success across all modes)*
-- `[Placeholder: FPGA Board Photo]`
-- `[Placeholder: Auto-Test Terminal/Notebook Output]`
 
 ## 6. Applications
 - **High-Speed Peripherals:** Used for interfacing with SD cards, LCD screens, and high-speed ADCs/DACs.

@@ -41,7 +41,6 @@ The Smart Traffic Light Controller is primarily driven by a Finite State Machine
 *![Hardware Setup](../Images/board_setup.jpg)*
 - Photo 1: PYNQ-Z2 board displaying normal sequence on RGB LEDs.
 - Photo 2: Board reacting to a button press (Pedestrian Interrupt).
-- **Resource Utilization**: (Insert table/screenshot of LUTs, FFs, etc. used).
 
 ## 6. Applications
 - Urban traffic management systems

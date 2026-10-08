@@ -34,10 +34,8 @@ To maintain correct execution in the presence of pipeline hazards, the design in
 The processor executes a hardcoded Fibonacci program stored in the instruction memory, demonstrating correct instruction fetching, decoding, arithmetic operations, and robust hazard handling.
 
 ## 4. Simulation Results
-*[Placeholder: Insert simulation waveforms and timing analysis here]*
 
 ## 5. Hardware Implementation
-*[Placeholder: Insert resource utilization, clock frequency, and on-board testing results here]*
 
 ## 6. Applications
 Pipelined processors are fundamental to modern computing architectures. Specific applications include:

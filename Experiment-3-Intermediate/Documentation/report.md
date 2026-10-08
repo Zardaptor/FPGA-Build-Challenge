@@ -27,14 +27,9 @@ The RTL design is built around the following key components:
 
 ## 4. Simulation Results
 *(Add screenshots of behavioral simulation waveforms here, showing the RX sampling process, TX shifting out data, and parity bit generation/checking)*
-- `[Placeholder: UART RX Waveform Screenshot]`
-- `[Placeholder: UART TX Waveform Screenshot]`
-- `[Placeholder: Loopback Testbench Screenshot]`
 
 ## 5. Hardware Implementation
 *(Add photos of the setup or screenshots of the PYNQ Jupyter Notebook showing successful loopback tests)*
-- `[Placeholder: FPGA Board Setup Photo]`
-- `[Placeholder: PYNQ Jupyter Notebook Output]`
 
 ## 6. Applications
 - **PC to FPGA Communications:** UART is widely used for simple, low-speed communication between a host computer and the FPGA for debugging and control.
