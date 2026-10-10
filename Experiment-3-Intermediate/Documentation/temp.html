@@ -1,9 +1,35 @@
-<html><head><style>img { max-width: 100%; }</style></head><body><h1>Experiment 3: UART Transceiver with Internal Loopback</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+<style>
+    body { font-family: "Segoe UI", Arial, sans-serif; line-height: 1.6; color: #333; margin: 40px auto; max-width: 900px; padding: 0 40px; }
+    h1 { color: #0056b3; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 2.2em; }
+    h2 { color: #2c3e50; margin-top: 30px; font-size: 1.5em; border-bottom: 1px solid #eaeaea; padding-bottom: 5px; }
+    img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+    .mermaid { display: flex; justify-content: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border-radius: 8px; border: 1px solid #ddd; }
+    code { background-color: #f4f4f4; padding: 2px 4px; border-radius: 4px; font-family: monospace; }
+    pre code { display: block; padding: 15px; overflow-x: auto; border: 1px solid #ddd; }
+    ul, ol { margin-left: 20px; }
+    li { margin-bottom: 8px; }
+</style>
+
+    
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    });
+</script>
+
+</head>
+<body>
+    <h1>Experiment 3: UART Transceiver with Internal Loopback</h1>
 <h2>1. Objective</h2>
 <p>The objective of this experiment is to design, simulate, and implement a Universal Asynchronous Receiver-Transmitter (UART) transceiver. The design includes both Receiver (RX) and Transmitter (TX) modules, operating at 9600 baud with 16x oversampling and even parity, wrapped in a PYNQ internal loopback for hardware verification.</p>
 <h2>2. Block Diagram</h2>
-<p><code>mermaid
-flowchart LR
+<p><code>&lt;div class="mermaid"&gt;flowchart LR
     subgraph PYNQ Wrapper
         direction LR
         RX[UART RX] --&gt; |Data Out| FIFO{Internal Loopback}
@@ -12,7 +38,7 @@ flowchart LR
     PC_TX[PC / External TX] --&gt;|RX Data| RX
     TX --&gt;|TX Data| PC_RX[PC / External RX]
     Clock[Clock Generator] --&gt; RX
-    Clock --&gt; TX</code></p>
+    Clock --&gt; TX&lt;/div&gt;</code></p>
 <h2>3. RTL Design</h2>
 <p>The RTL design is built around the following key components:
 - <strong>UART RX/TX:</strong> Handles the asynchronous serial communication.
@@ -29,4 +55,6 @@ flowchart LR
 <li><strong>IoT Devices:</strong> Many sensors, GPS modules, and IoT microcontrollers (like ESP8266/ESP32) interface via UART.</li>
 </ul>
 <h2>7. Conclusion</h2>
-<p>This experiment successfully demonstrates the implementation of a complete UART transceiver. The inclusion of 16x oversampling improves reception reliability, and even parity provides basic error detection. The internal loopback wrapper enabled quick and efficient hardware verification on the PYNQ platform.</p></body></html>
+<p>This experiment successfully demonstrates the implementation of a complete UART transceiver. The inclusion of 16x oversampling improves reception reliability, and even parity provides basic error detection. The internal loopback wrapper enabled quick and efficient hardware verification on the PYNQ platform.</p>
+</body>
+</html>

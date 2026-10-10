@@ -1,0 +1,75 @@
+import os, glob, shutil, subprocess, re, markdown
+
+edge_path = r'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
+
+css = '''
+<style>
+    body { font-family: "Segoe UI", Arial, sans-serif; line-height: 1.6; color: #333; margin: 40px auto; max-width: 900px; padding: 0 40px; }
+    h1 { color: #0056b3; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 2.2em; }
+    h2 { color: #2c3e50; margin-top: 30px; font-size: 1.5em; border-bottom: 1px solid #eaeaea; padding-bottom: 5px; }
+    img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+    .mermaid { display: flex; justify-content: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border-radius: 8px; border: 1px solid #ddd; }
+    code { background-color: #f4f4f4; padding: 2px 4px; border-radius: 4px; font-family: monospace; }
+    pre code { display: block; padding: 15px; overflow-x: auto; border: 1px solid #ddd; }
+    ul, ol { margin-left: 20px; }
+    li { margin-bottom: 8px; }
+</style>
+'''
+
+mermaid_js = '''
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    });
+</script>
+'''
+
+def process_md_to_pdf(md_file, pdf_file, html_file):
+    with open(md_file, 'r', encoding='utf-8') as f:
+        text = f.read()
+        
+    text = re.sub(r'`mermaid\s*(.*?)\s*`', r'<div class="mermaid">\1</div>', text, flags=re.DOTALL)
+    
+    html_content = markdown.markdown(text, extensions=['tables', 'fenced_code'])
+    
+    full_html = f'''<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    {css}
+    {mermaid_js}
+</head>
+<body>
+    {html_content}
+</body>
+</html>
+'''
+    with open(html_file, 'w', encoding='utf-8') as f:
+        f.write(full_html)
+        
+    pdf_out = os.path.abspath(pdf_file)
+    html_in = 'file:///' + os.path.abspath(html_file).replace('\\\\', '/')
+    
+    cmd = f'Start-Process -FilePath "{edge_path}" -ArgumentList "--headless","--disable-gpu","--no-pdf-header-footer","--virtual-time-budget=5000","--print-to-pdf={pdf_out}","{html_in}" -Wait -NoNewWindow'
+    subprocess.run(['powershell', '-Command', cmd])
+
+
+for i in range(1, 6):
+    exp_folders = glob.glob(f'Experiment-{i}-*')
+    if not exp_folders: continue
+    exp_dir = exp_folders[0]
+
+    md_file = os.path.join(exp_dir, 'Documentation', 'report.md')
+    pdf_file = os.path.join(exp_dir, 'Documentation', 'report.pdf')
+    html_file = os.path.join(exp_dir, 'Documentation', 'temp.html')
+    
+    if os.path.exists(md_file):
+        process_md_to_pdf(md_file, pdf_file, html_file)
+        
+        sim_pdf = os.path.join(exp_dir, 'Simulation', 'simulation_report.pdf')
+        if os.path.exists(pdf_file):
+            shutil.copy(pdf_file, sim_pdf)
+            
+process_md_to_pdf('Final_Report/Team_Suraj_Final_Report.md', 'Final_Report/TeamName_Final_Report.pdf', 'Final_Report/temp.html')
+print('PDF formatting complete!')

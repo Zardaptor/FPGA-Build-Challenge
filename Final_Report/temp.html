@@ -1,4 +1,31 @@
-<html><body><h1>V-SPACE FPGA Build Challenge: Team Suraj Final Report</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+<style>
+    body { font-family: "Segoe UI", Arial, sans-serif; line-height: 1.6; color: #333; margin: 40px auto; max-width: 900px; padding: 0 40px; }
+    h1 { color: #0056b3; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 2.2em; }
+    h2 { color: #2c3e50; margin-top: 30px; font-size: 1.5em; border-bottom: 1px solid #eaeaea; padding-bottom: 5px; }
+    img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+    .mermaid { display: flex; justify-content: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border-radius: 8px; border: 1px solid #ddd; }
+    code { background-color: #f4f4f4; padding: 2px 4px; border-radius: 4px; font-family: monospace; }
+    pre code { display: block; padding: 15px; overflow-x: auto; border: 1px solid #ddd; }
+    ul, ol { margin-left: 20px; }
+    li { margin-bottom: 8px; }
+</style>
+
+    
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    });
+</script>
+
+</head>
+<body>
+    <h1>V-SPACE FPGA Build Challenge: Team Suraj Final Report</h1>
 <h2>Executive Summary</h2>
 <p>This report summarizes the journey, technical achievements, and learnings of Team Suraj throughout the V-SPACE FPGA Build Challenge. Over the course of 5 experiments, the team progressed from fundamental digital logic concepts to advanced, complex digital systems. A core philosophy for the team was pushing beyond the basic beginner specifications for each experiment, challenging ourselves to design more robust, feature-rich, and performant hardware.</p>
 <h2>Summary of Experiments</h2>
@@ -32,4 +59,6 @@
 <li><strong>Hardware vs. Software Bugs:</strong> Debugging hardware proved fundamentally different from software. Software executes sequentially, while hardware is inherently parallel. Issues like race conditions, clock domain crossings, and uninitialized states required a complete shift in mindset. We heavily relied on simulation testbenches, waveform analysis, and Integrated Logic Analyzers (ILAs) for on-chip debugging, discovering that a "fix" in hardware often meant rethinking the entire architecture rather than just patching a line of code.</li>
 </ul>
 <h2>Conclusion</h2>
-<p>The V-SPACE FPGA Build Challenge was an invaluable experience. By actively choosing to tackle advanced specifications like a fully pipelined RISC-V processor and multi-mode SPI interfaces, Team Suraj gained profound, practical knowledge of RTL design, FPGA architecture, and the complete hardware development lifecycle.</p></body></html>
+<p>The V-SPACE FPGA Build Challenge was an invaluable experience. By actively choosing to tackle advanced specifications like a fully pipelined RISC-V processor and multi-mode SPI interfaces, Team Suraj gained profound, practical knowledge of RTL design, FPGA architecture, and the complete hardware development lifecycle.</p>
+</body>
+</html>

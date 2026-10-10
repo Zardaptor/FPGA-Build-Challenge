@@ -1,9 +1,35 @@
-<html><head><style>img { max-width: 100%; }</style></head><body><h1>Experiment 1: Advanced 8-bit ALU with NZCV flags</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+<style>
+    body { font-family: "Segoe UI", Arial, sans-serif; line-height: 1.6; color: #333; margin: 40px auto; max-width: 900px; padding: 0 40px; }
+    h1 { color: #0056b3; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 2.2em; }
+    h2 { color: #2c3e50; margin-top: 30px; font-size: 1.5em; border-bottom: 1px solid #eaeaea; padding-bottom: 5px; }
+    img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+    .mermaid { display: flex; justify-content: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border-radius: 8px; border: 1px solid #ddd; }
+    code { background-color: #f4f4f4; padding: 2px 4px; border-radius: 4px; font-family: monospace; }
+    pre code { display: block; padding: 15px; overflow-x: auto; border: 1px solid #ddd; }
+    ul, ol { margin-left: 20px; }
+    li { margin-bottom: 8px; }
+</style>
+
+    
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    });
+</script>
+
+</head>
+<body>
+    <h1>Experiment 1: Advanced 8-bit ALU with NZCV flags</h1>
 <h2>1. Objective</h2>
 <p>To design, simulate, and implement an Advanced 8-bit Arithmetic Logic Unit (ALU) capable of performing various arithmetic and logical operations while generating Negative (N), Zero (Z), Carry (C), and Overflow (V) flags.</p>
 <h2>2. Block Diagram</h2>
-<p>```mermaid
-flowchart TD
+<p>``<div class="mermaid">flowchart TD
     A[Operand A 8-bit] --&gt; ALU[8-bit ALU]
     B[Operand B 8-bit] --&gt; ALU
     Op[Opcode 4-bit] --&gt; ALU
@@ -11,9 +37,8 @@ flowchart TD
     ALU --&gt; Flags[NZCV Flags 4-bit]</p>
 <pre><code>subgraph ALU_Block
 ALU
-end
+end&lt;/div&gt;``
 </code></pre>
-<p>```</p>
 <h2>3. RTL Design</h2>
 <p>The design consists of an 8-bit ALU that supports operations such as ADD, SUB, AND, OR, XOR, NOT, and shifts. 
 - <strong>8-bit ALU</strong>: The core logic performs the selected operation based on a 4-bit Opcode.
@@ -39,4 +64,6 @@ end
 <li>Embedded microcontrollers</li>
 </ul>
 <h2>7. Conclusion</h2>
-<p>An 8-bit Advanced ALU with accurate NZCV flag generation was successfully designed and tested. The implementation on the PYNQ-Z2 board verifies the hardware functionality, making it a reliable building block for more complex computational architectures.</p></body></html>
+<p>An 8-bit Advanced ALU with accurate NZCV flag generation was successfully designed and tested. The implementation on the PYNQ-Z2 board verifies the hardware functionality, making it a reliable building block for more complex computational architectures.</p>
+</body>
+</html>

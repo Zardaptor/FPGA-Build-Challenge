@@ -1,9 +1,35 @@
-<html><head><style>img { max-width: 100%; }</style></head><body><h1>Experiment 5: Advanced - Pipelined RISC-V Processor</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+<style>
+    body { font-family: "Segoe UI", Arial, sans-serif; line-height: 1.6; color: #333; margin: 40px auto; max-width: 900px; padding: 0 40px; }
+    h1 { color: #0056b3; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 2.2em; }
+    h2 { color: #2c3e50; margin-top: 30px; font-size: 1.5em; border-bottom: 1px solid #eaeaea; padding-bottom: 5px; }
+    img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+    .mermaid { display: flex; justify-content: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border-radius: 8px; border: 1px solid #ddd; }
+    code { background-color: #f4f4f4; padding: 2px 4px; border-radius: 4px; font-family: monospace; }
+    pre code { display: block; padding: 15px; overflow-x: auto; border: 1px solid #ddd; }
+    ul, ol { margin-left: 20px; }
+    li { margin-bottom: 8px; }
+</style>
+
+    
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    });
+</script>
+
+</head>
+<body>
+    <h1>Experiment 5: Advanced - Pipelined RISC-V Processor</h1>
 <h2>1. Objective</h2>
 <p>The objective of this experiment is to design, implement, and verify a 32-bit pipelined RISC-V processor supporting the RV32I Instruction Set Architecture (ISA). This advanced design aims to improve instruction throughput compared to a single-cycle processor by executing multiple instructions concurrently across different pipeline stages, while effectively handling data and control hazards.</p>
 <h2>2. Block Diagram</h2>
-<p>```mermaid
-flowchart TD
+<p>``<div class="mermaid">flowchart TD
     IF[Instruction Fetch - IF] --&gt; ID[Instruction Decode - ID]
     ID --&gt; EX[Execute - EX]
     EX --&gt; MEM[Memory Access - MEM]
@@ -12,9 +38,8 @@ flowchart TD
 MEM -. Forwarding .-&gt; EX
 WB -. Forwarding .-&gt; EX
 WB -. Register Write .-&gt; ID
-EX -. Branch/Jump .-&gt; IF
+EX -. Branch/Jump .-&gt; IF&lt;/div&gt;``
 </code></pre>
-<p>```</p>
 <h2>3. RTL Design</h2>
 <p>The processor is built around the 32-bit RISC-V RV32I ISA and is structured into a classic 5-stage pipeline to maximize throughput:
 1. <strong>Instruction Fetch (IF):</strong> Fetches the next instruction from instruction memory based on the Program Counter (PC).
@@ -34,4 +59,6 @@ EX -. Branch/Jump .-&gt; IF
 * <strong>Automotive Microcontrollers:</strong> Powering engine control units, Advanced Driver Assistance Systems (ADAS), and in-vehicle infotainment systems, similar to highly reliable microcontrollers developed by companies like NXP.
 * <strong>Custom Accelerators:</strong> Serving as efficient control processors for specialized hardware accelerators in FPGAs and ASICs.</p>
 <h2>7. Conclusion</h2>
-<p>Implementing a 5-stage pipelined RISC-V processor provided deep insights into advanced computer architecture concepts. Successfully resolving data and control hazards through forwarding and stalling was crucial for maintaining correctness without severely impacting performance. The project demonstrates a solid understanding of RTL design, pipeline optimization, and complex digital systems.</p></body></html>
+<p>Implementing a 5-stage pipelined RISC-V processor provided deep insights into advanced computer architecture concepts. Successfully resolving data and control hazards through forwarding and stalling was crucial for maintaining correctness without severely impacting performance. The project demonstrates a solid understanding of RTL design, pipeline optimization, and complex digital systems.</p>
+</body>
+</html>

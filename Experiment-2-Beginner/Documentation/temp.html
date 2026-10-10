@@ -1,9 +1,35 @@
-<html><head><style>img { max-width: 100%; }</style></head><body><h1>Experiment 2: Smart Traffic Light Controller</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+<style>
+    body { font-family: "Segoe UI", Arial, sans-serif; line-height: 1.6; color: #333; margin: 40px auto; max-width: 900px; padding: 0 40px; }
+    h1 { color: #0056b3; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 2.2em; }
+    h2 { color: #2c3e50; margin-top: 30px; font-size: 1.5em; border-bottom: 1px solid #eaeaea; padding-bottom: 5px; }
+    img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+    .mermaid { display: flex; justify-content: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border-radius: 8px; border: 1px solid #ddd; }
+    code { background-color: #f4f4f4; padding: 2px 4px; border-radius: 4px; font-family: monospace; }
+    pre code { display: block; padding: 15px; overflow-x: auto; border: 1px solid #ddd; }
+    ul, ol { margin-left: 20px; }
+    li { margin-bottom: 8px; }
+</style>
+
+    
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    });
+</script>
+
+</head>
+<body>
+    <h1>Experiment 2: Smart Traffic Light Controller</h1>
 <h2>1. Objective</h2>
 <p>To design and implement a Smart Traffic Light Controller utilizing a Finite State Machine (FSM), featuring pedestrian interrupt capabilities and an emergency vehicle preemption system.</p>
 <h2>2. Block Diagram</h2>
-<p>```mermaid
-stateDiagram-v2
+<p>``<div class="mermaid">stateDiagram-v2
     [*] --&gt; NorthSouthGreen
     NorthSouthGreen --&gt; NorthSouthYellow : Timer / Interrupt
     NorthSouthYellow --&gt; EastWestGreen : Timer
@@ -17,9 +43,8 @@ stateDiagram-v2
 NorthSouthGreen --&gt; EmergencyPreemption : Emergency Signal
 EastWestGreen --&gt; EmergencyPreemption : Emergency Signal
 NorthSouthYellow --&gt; EmergencyPreemption : Emergency Signal
-EastWestYellow --&gt; EmergencyPreemption : Emergency Signal
+EastWestYellow --&gt; EmergencyPreemption : Emergency Signal&lt;/div&gt;``
 </code></pre>
-<p>```</p>
 <h2>3. RTL Design</h2>
 <p>The Smart Traffic Light Controller is primarily driven by a Finite State Machine (FSM).
 - <strong>FSM Logic</strong>: Controls the sequence of states: North-South Green, North-South Yellow, East-West Green, and East-West Yellow. The transitions are governed by timers.
@@ -42,4 +67,6 @@ EastWestYellow --&gt; EmergencyPreemption : Emergency Signal
 <li>Industrial automated guided vehicle (AGV) intersection control</li>
 </ul>
 <h2>7. Conclusion</h2>
-<p>The Smart Traffic Light Controller was effectively implemented using an FSM. The integration of debounce logic ensured reliable input handling, while the pedestrian interrupt and emergency preemption features demonstrated the system's ability to handle complex, real-world, priority-based scenarios.</p></body></html>
+<p>The Smart Traffic Light Controller was effectively implemented using an FSM. The integration of debounce logic ensured reliable input handling, while the pedestrian interrupt and emergency preemption features demonstrated the system's ability to handle complex, real-world, priority-based scenarios.</p>
+</body>
+</html>

@@ -1,9 +1,35 @@
-<html><head><style>img { max-width: 100%; }</style></head><body><h1>Experiment 4: SPI Multi-Mode Master/Slave</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+<style>
+    body { font-family: "Segoe UI", Arial, sans-serif; line-height: 1.6; color: #333; margin: 40px auto; max-width: 900px; padding: 0 40px; }
+    h1 { color: #0056b3; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 2.2em; }
+    h2 { color: #2c3e50; margin-top: 30px; font-size: 1.5em; border-bottom: 1px solid #eaeaea; padding-bottom: 5px; }
+    img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+    .mermaid { display: flex; justify-content: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border-radius: 8px; border: 1px solid #ddd; }
+    code { background-color: #f4f4f4; padding: 2px 4px; border-radius: 4px; font-family: monospace; }
+    pre code { display: block; padding: 15px; overflow-x: auto; border: 1px solid #ddd; }
+    ul, ol { margin-left: 20px; }
+    li { margin-bottom: 8px; }
+</style>
+
+    
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    });
+</script>
+
+</head>
+<body>
+    <h1>Experiment 4: SPI Multi-Mode Master/Slave</h1>
 <h2>1. Objective</h2>
 <p>The objective of this experiment is to design and implement a Serial Peripheral Interface (SPI) system featuring both Master and Slave modules capable of supporting all four SPI modes (combinations of Clock Polarity - CPOL and Clock Phase - CPHA). The system includes a PYNQ Auto-Test loopback wrapper for automated verification.</p>
 <h2>2. Block Diagram</h2>
-<p><code>mermaid
-flowchart LR
+<p><code>&lt;div class="mermaid"&gt;flowchart LR
     subgraph PYNQ Auto-Test Loopback Wrapper
         direction LR
         subgraph SPI_Master[SPI Master]
@@ -19,7 +45,7 @@ flowchart LR
         M_CTRL -- "SS (Slave Select)" --&gt; S_CTRL
         ModeCtrl[Mode Control Logic\n1Hz Cycle] --&gt; SPI_Master
         ModeCtrl --&gt; SPI_Slave
-    end</code></p>
+    end&lt;/div&gt;</code></p>
 <h2>3. RTL Design</h2>
 <p>The design implements a highly configurable SPI communication link:
 - <strong>Master vs Slave Logic:</strong> The SPI Master generates the serial clock (SCLK) and drives the Slave Select (SS) line to initiate communication. It transmits data on the Master Out Slave In (MOSI) line and receives on the Master In Slave Out (MISO) line. The Slave module relies on the incoming SCLK and SS signals, reading from MOSI and driving MISO appropriately.
@@ -35,4 +61,6 @@ flowchart LR
 <li><strong>Inter-IC Communication:</strong> A standard protocol for short-distance, on-board communication between microcontrollers and various sensor ICs.</li>
 </ul>
 <h2>7. Conclusion</h2>
-<p>The implemented SPI Multi-Mode Master/Slave system successfully demonstrates flexible, high-speed serial communication. By supporting all CPOL and CPHA configurations, the modules can interface with virtually any standard SPI peripheral. The 1Hz automated loopback test on the PYNQ platform proved the robustness and correctness of the RTL design across all operational modes.</p></body></html>
+<p>The implemented SPI Multi-Mode Master/Slave system successfully demonstrates flexible, high-speed serial communication. By supporting all CPOL and CPHA configurations, the modules can interface with virtually any standard SPI peripheral. The 1Hz automated loopback test on the PYNQ platform proved the robustness and correctness of the RTL design across all operational modes.</p>
+</body>
+</html>
