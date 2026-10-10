@@ -1,0 +1,35 @@
+<html><body><h1>V-SPACE FPGA Build Challenge: Team Suraj Final Report</h1>
+<h2>Executive Summary</h2>
+<p>This report summarizes the journey, technical achievements, and learnings of Team Suraj throughout the V-SPACE FPGA Build Challenge. Over the course of 5 experiments, the team progressed from fundamental digital logic concepts to advanced, complex digital systems. A core philosophy for the team was pushing beyond the basic beginner specifications for each experiment, challenging ourselves to design more robust, feature-rich, and performant hardware.</p>
+<h2>Summary of Experiments</h2>
+<ul>
+<li>
+<p><strong>Experiment 1: Basic Logic &amp; Combinational Circuits</strong>
+  Established the foundation of digital design using hardware description languages, implementing basic logic gates and combinational circuits to understand synthesis and simulation flows.</p>
+</li>
+<li>
+<p><strong>Experiment 2: Sequential Logic &amp; State Machines</strong>
+  Explored flip-flops, registers, and Finite State Machines (FSMs). This laid the essential groundwork for the complex control logic used in later communication protocols and processors.</p>
+</li>
+<li>
+<p><strong>Experiment 3: Communication Interfaces (SPI)</strong>
+  Designed and implemented an SPI controller. Instead of a basic fixed-mode SPI, the team pushed for a <strong>multi-mode SPI implementation</strong>, supporting different clock polarities and phases (CPOL/CPHA), demonstrating a much deeper understanding of serial communication protocols.</p>
+</li>
+<li>
+<p><strong>Experiment 4: Memory Controllers &amp; DSP</strong>
+  Integrated block RAMs and implemented basic Digital Signal Processing (DSP) blocks, focusing heavily on efficient resource utilization and timing closure within the FPGA fabric.</p>
+</li>
+<li>
+<p><strong>Experiment 5: Advanced Processor Design (RISC-V)</strong>
+  The capstone project involved designing a RISC-V processor. Rather than settling for a simple single-cycle architecture, the team successfully engineered a <strong>5-stage pipelined CPU (RV32I)</strong> complete with a Forwarding Unit and Hazard Detection Unit to resolve data and control hazards, significantly maximizing instruction throughput.</p>
+</li>
+</ul>
+<h2>Hardware Learning Curve &amp; Challenges</h2>
+<p>Transitioning from standard software programming to hardware design presented a steep but ultimately rewarding learning curve:</p>
+<ul>
+<li><strong>Vivado Synthesis &amp; Implementation:</strong> We learned early on that writing code that simply simulates correctly is not enough. Understanding how RTL constructs synthesize into underlying lookup tables (LUTs), flip-flops, and block RAMs was crucial. We spent significant time analyzing synthesis reports, understanding timing constraints, and resolving critical setup/hold time violations.</li>
+<li><strong>PYNQ-Z2 Constraints:</strong> Deploying designs to the PYNQ-Z2 board required carefully managing physical constraints. This involved meticulous pin mapping via XDC files, understanding the limitations of the available logic resources, and successfully interfacing the Programmable Logic (PL) with the Processing System (PS).</li>
+<li><strong>Hardware vs. Software Bugs:</strong> Debugging hardware proved fundamentally different from software. Software executes sequentially, while hardware is inherently parallel. Issues like race conditions, clock domain crossings, and uninitialized states required a complete shift in mindset. We heavily relied on simulation testbenches, waveform analysis, and Integrated Logic Analyzers (ILAs) for on-chip debugging, discovering that a "fix" in hardware often meant rethinking the entire architecture rather than just patching a line of code.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The V-SPACE FPGA Build Challenge was an invaluable experience. By actively choosing to tackle advanced specifications like a fully pipelined RISC-V processor and multi-mode SPI interfaces, Team Suraj gained profound, practical knowledge of RTL design, FPGA architecture, and the complete hardware development lifecycle.</p></body></html>

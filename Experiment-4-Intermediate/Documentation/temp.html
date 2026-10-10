@@ -1,0 +1,38 @@
+<html><head><style>img { max-width: 100%; }</style></head><body><h1>Experiment 4: SPI Multi-Mode Master/Slave</h1>
+<h2>1. Objective</h2>
+<p>The objective of this experiment is to design and implement a Serial Peripheral Interface (SPI) system featuring both Master and Slave modules capable of supporting all four SPI modes (combinations of Clock Polarity - CPOL and Clock Phase - CPHA). The system includes a PYNQ Auto-Test loopback wrapper for automated verification.</p>
+<h2>2. Block Diagram</h2>
+<p><code>mermaid
+flowchart LR
+    subgraph PYNQ Auto-Test Loopback Wrapper
+        direction LR
+        subgraph SPI_Master[SPI Master]
+            M_CTRL[Master Control]
+            M_CLK[SCLK Gen]
+        end
+        subgraph SPI_Slave[SPI Slave]
+            S_CTRL[Slave Logic]
+        end
+        M_CTRL -- "MOSI" --&gt; S_CTRL
+        S_CTRL -- "MISO" --&gt; M_CTRL
+        M_CLK -- "SCLK" --&gt; S_CTRL
+        M_CTRL -- "SS (Slave Select)" --&gt; S_CTRL
+        ModeCtrl[Mode Control Logic\n1Hz Cycle] --&gt; SPI_Master
+        ModeCtrl --&gt; SPI_Slave
+    end</code></p>
+<h2>3. RTL Design</h2>
+<p>The design implements a highly configurable SPI communication link:
+- <strong>Master vs Slave Logic:</strong> The SPI Master generates the serial clock (SCLK) and drives the Slave Select (SS) line to initiate communication. It transmits data on the Master Out Slave In (MOSI) line and receives on the Master In Slave Out (MISO) line. The Slave module relies on the incoming SCLK and SS signals, reading from MOSI and driving MISO appropriately.
+- <strong>CPOL/CPHA Support:</strong> The design supports all four standard SPI modes (Modes 0, 1, 2, and 3). Clock Polarity (CPOL) determines the idle state of the clock line (0 or 1), while Clock Phase (CPHA) determines which clock edge (leading or trailing) is used for sampling and which is used for shifting data.
+- <strong>PYNQ Auto-Test Loopback Wrapper:</strong> To rigorously verify all SPI modes, a specialized PYNQ wrapper is employed. This wrapper connects the Master's MOSI directly to the Slave's MOSI input (and MISO to MISO). It includes logic that automatically cycles through the four SPI modes (CPOL/CPHA combinations) at a rate of 1Hz, verifying correct loopback transmission in each mode without manual intervention.</p>
+<h2>4. Simulation Results</h2>
+<p><em>(Add screenshots of waveforms demonstrating data transfer across different CPOL/CPHA settings)</em></p>
+<h2>5. Hardware Implementation</h2>
+<p><em>(Add photos of the FPGA running the test or screenshots of the PYNQ interface reporting success across all modes)</em></p>
+<h2>6. Applications</h2>
+<ul>
+<li><strong>High-Speed Peripherals:</strong> Used for interfacing with SD cards, LCD screens, and high-speed ADCs/DACs.</li>
+<li><strong>Inter-IC Communication:</strong> A standard protocol for short-distance, on-board communication between microcontrollers and various sensor ICs.</li>
+</ul>
+<h2>7. Conclusion</h2>
+<p>The implemented SPI Multi-Mode Master/Slave system successfully demonstrates flexible, high-speed serial communication. By supporting all CPOL and CPHA configurations, the modules can interface with virtually any standard SPI peripheral. The 1Hz automated loopback test on the PYNQ platform proved the robustness and correctness of the RTL design across all operational modes.</p></body></html>

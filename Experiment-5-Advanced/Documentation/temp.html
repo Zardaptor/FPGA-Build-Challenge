@@ -1,0 +1,37 @@
+<html><head><style>img { max-width: 100%; }</style></head><body><h1>Experiment 5: Advanced - Pipelined RISC-V Processor</h1>
+<h2>1. Objective</h2>
+<p>The objective of this experiment is to design, implement, and verify a 32-bit pipelined RISC-V processor supporting the RV32I Instruction Set Architecture (ISA). This advanced design aims to improve instruction throughput compared to a single-cycle processor by executing multiple instructions concurrently across different pipeline stages, while effectively handling data and control hazards.</p>
+<h2>2. Block Diagram</h2>
+<p>```mermaid
+flowchart TD
+    IF[Instruction Fetch - IF] --&gt; ID[Instruction Decode - ID]
+    ID --&gt; EX[Execute - EX]
+    EX --&gt; MEM[Memory Access - MEM]
+    MEM --&gt; WB[Write Back - WB]</p>
+<pre><code>%% Feedback paths for Forwarding and Hazard Handling
+MEM -. Forwarding .-&gt; EX
+WB -. Forwarding .-&gt; EX
+WB -. Register Write .-&gt; ID
+EX -. Branch/Jump .-&gt; IF
+</code></pre>
+<p>```</p>
+<h2>3. RTL Design</h2>
+<p>The processor is built around the 32-bit RISC-V RV32I ISA and is structured into a classic 5-stage pipeline to maximize throughput:
+1. <strong>Instruction Fetch (IF):</strong> Fetches the next instruction from instruction memory based on the Program Counter (PC).
+2. <strong>Instruction Decode (ID):</strong> Decodes the fetched instruction, reads operands from the register file, and generates the necessary control signals.
+3. <strong>Execute (EX):</strong> Performs Arithmetic Logic Unit (ALU) operations and calculates branch target addresses.
+4. <strong>Memory Access (MEM):</strong> Reads from or writes to the data memory.
+5. <strong>Write Back (WB):</strong> Writes the resulting data from the ALU or memory back to the register file.</p>
+<p>To maintain correct execution in the presence of pipeline hazards, the design includes:
+* <strong>Forwarding Unit:</strong> Resolves Read-After-Write (RAW) data hazards by forwarding results directly from the MEM or WB stages back to the EX stage, eliminating the need to wait for the register write to complete.
+* <strong>Hazard Unit:</strong> Handles load-use data hazards by stalling the pipeline when a dependent instruction immediately follows a load instruction. It also manages control hazards by flushing the pipeline (clearing the IF and ID stages) when a branch or jump is taken.</p>
+<p>The processor executes a hardcoded Fibonacci program stored in the instruction memory, demonstrating correct instruction fetching, decoding, arithmetic operations, and robust hazard handling.</p>
+<h2>4. Simulation Results</h2>
+<h2>5. Hardware Implementation</h2>
+<h2>6. Applications</h2>
+<p>Pipelined processors are fundamental to modern computing architectures. Specific applications include:
+* <strong>Embedded Systems:</strong> Providing efficient, low-power processing for IoT devices and smart appliances.
+* <strong>Automotive Microcontrollers:</strong> Powering engine control units, Advanced Driver Assistance Systems (ADAS), and in-vehicle infotainment systems, similar to highly reliable microcontrollers developed by companies like NXP.
+* <strong>Custom Accelerators:</strong> Serving as efficient control processors for specialized hardware accelerators in FPGAs and ASICs.</p>
+<h2>7. Conclusion</h2>
+<p>Implementing a 5-stage pipelined RISC-V processor provided deep insights into advanced computer architecture concepts. Successfully resolving data and control hazards through forwarding and stalling was crucial for maintaining correctness without severely impacting performance. The project demonstrates a solid understanding of RTL design, pipeline optimization, and complex digital systems.</p></body></html>

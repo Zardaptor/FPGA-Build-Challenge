@@ -1,0 +1,32 @@
+<html><head><style>img { max-width: 100%; }</style></head><body><h1>Experiment 3: UART Transceiver with Internal Loopback</h1>
+<h2>1. Objective</h2>
+<p>The objective of this experiment is to design, simulate, and implement a Universal Asynchronous Receiver-Transmitter (UART) transceiver. The design includes both Receiver (RX) and Transmitter (TX) modules, operating at 9600 baud with 16x oversampling and even parity, wrapped in a PYNQ internal loopback for hardware verification.</p>
+<h2>2. Block Diagram</h2>
+<p><code>mermaid
+flowchart LR
+    subgraph PYNQ Wrapper
+        direction LR
+        RX[UART RX] --&gt; |Data Out| FIFO{Internal Loopback}
+        FIFO --&gt; |Data In| TX[UART TX]
+    end
+    PC_TX[PC / External TX] --&gt;|RX Data| RX
+    TX --&gt;|TX Data| PC_RX[PC / External RX]
+    Clock[Clock Generator] --&gt; RX
+    Clock --&gt; TX</code></p>
+<h2>3. RTL Design</h2>
+<p>The RTL design is built around the following key components:
+- <strong>UART RX/TX:</strong> Handles the asynchronous serial communication.
+- <strong>9600 Baud Rate &amp; 16x Oversampling:</strong> The baud rate generator uses the system clock to create a tick at 16 times the 9600 baud rate (153,600 Hz). This oversampling allows the receiver to accurately sample the data line at the middle of each bit period, ensuring robust data reception even with slight timing mismatches.
+- <strong>Even Parity:</strong> Both the transmitter and receiver are configured to generate and check for even parity. The transmitter appends a parity bit to make the total number of 1s even, and the receiver verifies this to detect single-bit errors.
+- <strong>Internal Loopback PYNQ Wrapper:</strong> To facilitate testing without complex external wiring, a PYNQ wrapper is implemented. This wrapper connects the UART RX output directly to the UART TX input, echoing back any data received from the host system.</p>
+<h2>4. Simulation Results</h2>
+<p><em>(Add screenshots of behavioral simulation waveforms here, showing the RX sampling process, TX shifting out data, and parity bit generation/checking)</em></p>
+<h2>5. Hardware Implementation</h2>
+<p><em>(Add photos of the setup or screenshots of the PYNQ Jupyter Notebook showing successful loopback tests)</em></p>
+<h2>6. Applications</h2>
+<ul>
+<li><strong>PC to FPGA Communications:</strong> UART is widely used for simple, low-speed communication between a host computer and the FPGA for debugging and control.</li>
+<li><strong>IoT Devices:</strong> Many sensors, GPS modules, and IoT microcontrollers (like ESP8266/ESP32) interface via UART.</li>
+</ul>
+<h2>7. Conclusion</h2>
+<p>This experiment successfully demonstrates the implementation of a complete UART transceiver. The inclusion of 16x oversampling improves reception reliability, and even parity provides basic error detection. The internal loopback wrapper enabled quick and efficient hardware verification on the PYNQ platform.</p></body></html>

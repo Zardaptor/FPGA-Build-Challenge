@@ -1,0 +1,42 @@
+<html><head><style>img { max-width: 100%; }</style></head><body><h1>Experiment 1: Advanced 8-bit ALU with NZCV flags</h1>
+<h2>1. Objective</h2>
+<p>To design, simulate, and implement an Advanced 8-bit Arithmetic Logic Unit (ALU) capable of performing various arithmetic and logical operations while generating Negative (N), Zero (Z), Carry (C), and Overflow (V) flags.</p>
+<h2>2. Block Diagram</h2>
+<p>```mermaid
+flowchart TD
+    A[Operand A 8-bit] --&gt; ALU[8-bit ALU]
+    B[Operand B 8-bit] --&gt; ALU
+    Op[Opcode 4-bit] --&gt; ALU
+    ALU --&gt; Res[Result 8-bit]
+    ALU --&gt; Flags[NZCV Flags 4-bit]</p>
+<pre><code>subgraph ALU_Block
+ALU
+end
+</code></pre>
+<p>```</p>
+<h2>3. RTL Design</h2>
+<p>The design consists of an 8-bit ALU that supports operations such as ADD, SUB, AND, OR, XOR, NOT, and shifts. 
+- <strong>8-bit ALU</strong>: The core logic performs the selected operation based on a 4-bit Opcode.
+- <strong>NZCV Flags</strong>:
+  - <strong>N (Negative)</strong>: Set if the MSB of the result is 1.
+  - <strong>Z (Zero)</strong>: Set if the result is exactly zero.
+  - <strong>C (Carry)</strong>: Set if an arithmetic operation generates a carry out from the MSB.
+  - <strong>V (Overflow)</strong>: Set if an arithmetic operation results in a signed overflow.
+- <strong>PYNQ-Z2 Auto-Test Wrapper</strong>: A wrapper module designed for the PYNQ-Z2 board to facilitate automated testing by mapping the ALU I/O to the board's switches, buttons, and LEDs for hardware validation.</p>
+<h2>4. Simulation Results</h2>
+<p><em><img alt="Simulation Waveform" src="../Simulation/waveform.png" /></em>
+- Screenshot 1: Addition and Subtraction with N and C flags.
+- Screenshot 2: Logical operations with N and Z flags.
+- Screenshot 3: Overflow condition during signed arithmetic.</p>
+<h2>5. Hardware Implementation</h2>
+<p><em><img alt="Hardware Setup" src="../Images/board_setup.jpg" /></em>
+- Photo 1: PYNQ-Z2 board showing ALU inputs via switches.
+- Photo 2: PYNQ-Z2 board showing output result and flags on LEDs.</p>
+<h2>6. Applications</h2>
+<ul>
+<li>Central Processing Unit (CPU) ALUs</li>
+<li>Digital Signal Processing (DSP) applications</li>
+<li>Embedded microcontrollers</li>
+</ul>
+<h2>7. Conclusion</h2>
+<p>An 8-bit Advanced ALU with accurate NZCV flag generation was successfully designed and tested. The implementation on the PYNQ-Z2 board verifies the hardware functionality, making it a reliable building block for more complex computational architectures.</p></body></html>
